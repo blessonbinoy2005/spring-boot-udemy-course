@@ -7,6 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import java.util.List;
 
 @SpringBootApplication
 public class CruddemoApplication {
@@ -19,10 +20,55 @@ public class CruddemoApplication {
 	public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
 		return runner -> {
 //			createStudent(studentDAO);
-//			createMultiplestudents(studentDAO);
-
-			readStudent(studentDAO);
+//			createMultipleStudents(studentDAO);
+//			readStudent(studentDAO);
+//			queryForStudents(studentDAO);
+//			queryForStudentsByLastName(studentDAO);
+			updateStudent(studentDAO);
 		};
+	}
+
+	private void updateStudent(StudentDAO studentDAO) {
+		//retrieve student based on teh id: primary key
+		int studentID = 1;
+		System.out.println("Getting student with id: " + studentID);
+		Student myStudent = studentDAO.findById(studentID);
+
+		//change first name to "Scooby"
+		System.out.println("Updating student...");
+		myStudent.setFirstName("Scooby");
+
+		//update teh student
+		studentDAO.update(myStudent);
+
+		//display the updated student
+		System.out.println("Updated student: " + myStudent);
+	}
+
+	private void queryForStudentsByLastName(StudentDAO studentDAO) {
+		//get a list of students
+		List<Student> theStudents = studentDAO.findByLastName("Duck");
+
+		if (theStudents.isEmpty()) {
+			System.out.println("No students found.");
+		}
+		//display list of students
+		for (Student student : theStudents) {
+			System.out.println(student);
+		}
+
+
+	}
+
+	private void queryForStudents(StudentDAO studentDAO) {
+		// get a list of students
+		List<Student> theStudents = studentDAO.findAll();
+
+
+		//display list of students
+		for (Student tempStudent : theStudents) {
+			System.out.println(tempStudent);
+		}
 	}
 
 	private void readStudent(StudentDAO studentDAO) {
@@ -47,7 +93,7 @@ public class CruddemoApplication {
 
 	}
 
-	private void createMultiplestudents(StudentDAO studentDAO) {
+	private void createMultipleStudents(StudentDAO studentDAO) {
 		System.out.println("Creating a new student object ...");
 		Student tempStudent1 = new Student("Jack", "Nelson", "jackN@luv2code.com");
 		Student tempStudent2 = new Student("Kevin", "Zorr", "KevinZ@luv2code.com");
@@ -58,8 +104,6 @@ public class CruddemoApplication {
 		studentDAO.save(tempStudent1);
 		studentDAO.save(tempStudent2);
 		studentDAO.save(tempStudent3);
-
-
 	}
 
 	private void createStudent(StudentDAO studentDAO) {
