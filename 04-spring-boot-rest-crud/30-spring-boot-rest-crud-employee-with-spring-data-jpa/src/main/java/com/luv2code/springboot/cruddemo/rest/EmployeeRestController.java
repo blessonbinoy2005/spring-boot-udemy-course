@@ -2,7 +2,6 @@ package com.luv2code.springboot.cruddemo.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.luv2code.springboot.cruddemo.dao.EmployeeDAO;
 import com.luv2code.springboot.cruddemo.entity.Employee;
 import com.luv2code.springboot.cruddemo.service.EmployeeService;
 import org.springframework.web.bind.annotation.*;
