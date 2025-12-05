@@ -9,6 +9,81 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+
+/*
+Client / Browser / REST Client → Controller → Service → Repository → Database
+
+1️⃣ Employee (Entity)
+    This is your data model.
+    Represents a table in the database.
+    Each field = a column.
+    Spring/JPA will automatically map rows to Employee objects.
+    ✔ Used by: Repository, Service, Controller
+    ❌ Doesn’t call anything by itself.
+    Think: “What does an Employee look like in the system?”
+
+2️⃣ EmployeeRepository (DAO Layer)
+    This interface extends JpaRepository.
+    Because of that, Spring auto-creates all CRUD database methods:
+    findAll()
+    findById()
+    save()
+    deleteById()
+    etc.
+    ✔ Called by: Service
+    ❌ Does not call service or controller.
+    Think: “This is the database toolbox.”
+    You never write SQL—Spring Data does it for you.
+
+3️⃣ EmployeeService (Service Layer Interface)
+    This defines what operations your app supports, such as:
+    findAll()
+    findById()
+    save()
+    deleteById()
+    It’s just the blueprint — no logic here.
+    ✔ Implemented by: EmployeeServiceImpl
+    ✔ Called by: Controller
+    Think: “These are the features the app provides.”
+
+4️⃣ EmployeeServiceImpl (Service Implementation)
+    This class implements the service interface.
+    What does it actually do?
+    Uses the repository to talk to the database.
+    Contains business logic (if you had any).
+    Example flow:
+    Controller → Service → Repository → DB
+    and back.
+    ✔ Calls Repository
+    ✔ Called by Controller
+    Think: “This is the middleman between controller and database.”
+
+5️⃣ EmployeeRestController (REST API Layer)
+
+    This exposes API endpoints like:
+    GET /api/employees
+    GET /api/employees/{id}
+    POST /api/employees
+    PUT /api/employees
+    DELETE /api/employees/{id}
+    It receives HTTP requests → uses Service → returns results.
+    ✔ Calls Service
+    ❌ Never touches database directly.
+    Think: “This is what the outside world (Postman/browser) talks to.”
+
+    ----
+
+    (You / Browser / Postman)
+            ↓
+   EmployeeRestController
+            ↓
+       EmployeeService
+            ↓
+   EmployeeServiceImpl
+            ↓
+     EmployeeRepository
+            ↓
+ */
 @RestController
 @RequestMapping("/api")
 public class EmployeeRestController {
