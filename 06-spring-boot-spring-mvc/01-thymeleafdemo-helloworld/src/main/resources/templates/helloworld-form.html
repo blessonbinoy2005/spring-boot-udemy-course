@@ -1,17 +1,13 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<!DOCTYPE HTML>
+<html xml:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Hello World - Input Form</title>
+  <meta charset="UTF-8">
+  <title>Hello World - Input Form</title>
 </head>
 <body>
-
-    <!-- after u click submit it will send to processForm   -->
-    <form th:action="@{/processFormVersionTwo}" method="GET">
-        <input type="text" name="studentName" placeholder="What's your name?" />
-
-        <input type="submit" />
-    </form>
+  <form th:action="@{/processForm}" method="GET">
+    <input type="text" name="studentName" placeholder="What's your name?" />
+    <input type="submit" />
+  </form>
 </body>
 </html>

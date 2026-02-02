@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE HTML>
+<html xml:th="http://www.thymeleaf.org">
+
 <head>
-  <title>Thymeleaf Demo</title>
+    <title>Thymeleaf Demo</title>
 
-  <!--  reference css file-->
-  <link rel="stylesheet" th:href="@{/css/demo.css}" />
+    <!-- reference CSS file -->
+    <link rel="stylesheet" th:href="@{/css/demo.css}" />
 </head>
+
 <body>
-
-  <p th:text="'Time on the server is ' + ${theDate}" class="funny" />
-
+    <p th:text="'Time on the server is ' + ${theDate} " class="funny" />
 </body>
+
 </html>
